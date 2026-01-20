@@ -1,5 +1,5 @@
 /* ===============================
-   GLOBAL STYLING
+   GLOBAL
 ================================ */
 * {
     box-sizing: border-box;
@@ -13,7 +13,6 @@ body {
     padding: 20px;
 }
 
-/* Überschriften */
 h1 {
     color: #6fa8dc;
     text-align: center;
@@ -28,94 +27,7 @@ h2 {
 }
 
 /* ===============================
-   ITEMS CONTAINER
-================================ */
-#items {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    max-width: 500px;
-    margin: 0 auto 20px;
-}
-
-/* TODO Card */
-#items div {
-    background: #fffdf8;
-    padding: 16px 20px;
-    border-radius: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 8px 16px rgba(180, 210, 235, 0.4);
-    position: relative;
-}
-
-/* kleine Süßigkeiten-Deko */
-#items div::before {
-    content: "🍰";
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    font-size: 20px;
-}
-
-/* Text */
-#items p {
-    margin: 0;
-    font-size: 16px;
-    color: #6b7f90;
-}
-
-/* ===============================
-   HERZ BUTTONS
-================================ */
-button {
-    position: relative;
-    width: 40px;
-    height: 40px;
-    background: #f6b1c8;
-    border: none;
-    cursor: pointer;
-    transform: rotate(-45deg);
-    border-radius: 8px;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-/* Herz Rundungen */
-button::before,
-button::after {
-    content: "";
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    background: inherit;
-    border-radius: 50%;
-}
-
-button::before {
-    top: -20px;
-    left: 0;
-}
-
-button::after {
-    left: 20px;
-    top: 0;
-}
-
-/* Hover Effekt */
-button:hover {
-    box-shadow: 0 6px 14px rgba(246, 177, 200, 0.6);
-    transform: rotate(-45deg) scale(1.08);
-}
-
-/* Add Button blau */
-button[onclick="addItem()"] {
-    background: #9cccf3;
-    margin-top: 10px;
-}
-
-/* ===============================
-   INPUT FELD
+   INPUT
 ================================ */
 #input-container {
     display: flex;
@@ -130,13 +42,127 @@ input {
     border: 1px solid #cfe4f7;
     font-size: 16px;
     flex: 1;
-    min-width: 0;
     background: #ffffff;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
 }
 
 input::placeholder {
     color: #b3cde6;
+}
+
+/* ===============================
+   ITEMS
+================================ */
+#items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 500px;
+    margin: 0 auto 20px;
+}
+
+#items div {
+    background: #fffdf8;
+    padding: 16px 20px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 8px 16px rgba(180, 210, 235, 0.4);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+#items div::before {
+    content: "🍰";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    font-size: 20px;
+}
+
+#items div.dragging {
+    opacity: 0.5;
+    transform: scale(1.05);
+}
+
+#items div.removing {
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+/* Text */
+#items p {
+    font-size: 16px;
+    color: #6b7f90;
+    transition: all 0.3s ease;
+}
+
+#items p.done {
+    text-decoration: line-through;
+    color: #a0a0a0;
+}
+
+/* ===============================
+   HERZ-BUTTONS
+================================ */
+button {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    border: none;
+    cursor: pointer;
+    transform: rotate(-45deg);
+    border-radius: 8px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    padding: 0;
+    margin: 0;
+}
+
+/* Herzform */
+button::before,
+button::after {
+    content: "";
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: inherit;
+}
+
+button::before {
+    top: -16px;
+    left: 0;
+}
+
+button::after {
+    left: 16px;
+    top: 0;
+}
+
+button:hover {
+    transform: rotate(-45deg) scale(1.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Done Button → rosa */
+button.done-btn {
+    background: #f6b1c8;
+}
+
+/* Delete Button → blau */
+button.delete-btn {
+    background: #9cccf3;
+}
+
+/* Add Button → blau, kein Text */
+#addButton {
+    background: #9cccf3;
+}
+
+/* Gruppe für Done/Delete Buttons nebeneinander */
+.button-group {
+    display: flex;
+    gap: 2px;
 }
 
 /* ===============================
@@ -153,39 +179,10 @@ body::before {
 }
 
 /* ===============================
-   RESPONSIVE DESIGN
+   RESPONSIVE
 ================================ */
 @media (max-width: 480px) {
-    body {
-        padding: 10px;
-    }
-
-    #items {
-        max-width: 100%;
-    }
-
     #input-container {
         flex-direction: column;
-        gap: 8px;
-    }
-
-    input {
-        font-size: 14px;
-        padding: 10px;
-    }
-
-    button[onclick="addItem()"] {
-        width: 45px;
-        height: 45px;
-        padding: 10px;
-    }
-
-    #items div {
-        padding: 12px;
-    }
-
-    #items button {
-        width: 35px;
-        height: 35px;
     }
 }
