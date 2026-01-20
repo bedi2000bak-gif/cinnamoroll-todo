@@ -113,6 +113,7 @@ h2 {
     border-radius: 8px;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+
 .delete-btn {
     width: 32px;
     height: 32px;
@@ -124,13 +125,15 @@ h2 {
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.done-btn:hover, .delete-btn:hover {
+.done-btn:hover,
+.delete-btn:hover {
     transform: rotate(-45deg) scale(1.08);
     box-shadow: 0 6px 12px rgba(0,0,0,0.2);
 }
 
 /* Subtask Buttons */
-.sub-done-btn, .sub-delete-btn {
+.sub-done-btn,
+.sub-delete-btn {
     width: 20px;
     height: 20px;
     border: none;
@@ -142,7 +145,8 @@ h2 {
 .sub-done-btn { background: #f6b1c8; }
 .sub-delete-btn { background: #9cccf3; }
 
-.sub-done-btn:hover, .sub-delete-btn:hover {
+.sub-done-btn:hover,
+.sub-delete-btn:hover {
     transform: scale(1.2);
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
@@ -150,7 +154,8 @@ h2 {
 /* ===============================
    INPUT FELD
 ================================ */
-#input-container, .sub-input-container {
+#input-container,
+.sub-input-container {
     display: flex;
     gap: 10px;
     max-width: 500px;
@@ -200,12 +205,50 @@ body::before {
 /* ===============================
    RESPONSIVE DESIGN
 ================================ */
-@media (max-width: 480px) {
-    body { padding: 10px; }
-    #items, #input-container { max-width: 100%; }
-    #input-container, .sub-input-container { flex-direction: column; gap: 8px; }
-    input { font-size: 14px; padding: 10px; }
-    .done-btn, .delete-btn { width: 28px; height: 28px; }
-    .sub-done-btn, .sub-delete-btn { width: 18px; height: 18px; }
-    .add-sub-btn { width: 28px; height: 28px; }
+@media (max-width: 600px) {
+
+    body { padding: 15px; }
+
+    #items { gap: 16px; }
+
+    .todo-container { padding: 18px 22px; }
+
+    /* Haupttext größer */
+    .todo-container p { font-size: 18px; }
+
+    /* Subtask Text größer */
+    .subtask-item span { font-size: 16px; }
+
+    /* Buttons Haupttask größer */
+    .done-btn, .delete-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+    }
+
+    /* Buttons Subtask größer */
+    .sub-done-btn, .sub-delete-btn {
+        width: 26px;
+        height: 26px;
+        border-radius: 6px;
+    }
+
+    .subtask-list { margin-left: 15px; gap: 6px; }
+
+    .sub-input-container { gap: 8px; }
+
+    .add-sub-btn { width: 36px; height: 36px; font-size: 18px; }
+
+    /* Input-Feld größer */
+    input { font-size: 18px; padding: 14px 18px; }
+
+    /* Input Container & Buttons */
+    #input-container,
+    .sub-input-container {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    /* Button-Abstand */
+    .button-group { gap: 10px; }
 }
