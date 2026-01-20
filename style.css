@@ -1,41 +1,19 @@
-/* ===============================
-   GLOBAL STYLING
-================================ */
-* {
-    box-sizing: border-box;
-    font-family: "Segoe UI", Tahoma, sans-serif;
-    margin: 0;
-    padding: 0;
-}
+* { box-sizing: border-box; font-family: "Segoe UI", Tahoma, sans-serif; margin: 0; padding: 0; }
 
 body {
     background: linear-gradient(180deg, #eaf6ff, #fffdf8);
     padding: 20px;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* Überschriften */
-h1 {
-    color: #6fa8dc;
-    text-align: center;
-    text-shadow: 1px 1px #ffffff;
-    margin-bottom: 20px;
-}
+h1 { color: #6fa8dc; text-align: center; margin-bottom: 10px; }
+h2 { color: #9cccf3; text-align: center; margin-bottom: 20px; }
 
-h2 {
-    color: #9cccf3;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-/* ===============================
-   INPUT CONTAINER
-================================ */
+/* Input Container */
 #input-container,
 .sub-input-container {
-    display: flex;
-    gap: 10px;
-    max-width: 500px;
-    margin: 0 auto 20px;
+    display: flex; gap: 10px; max-width: 500px; margin: 0 auto 20px;
 }
 
 input {
@@ -46,187 +24,110 @@ input {
     font-size: 20px;
     background: #ffffff;
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+    color: #333;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
-input::placeholder {
-    color: #b3cde6;
-}
+input::placeholder { color: #b3cde6; }
 
 .add-sub-btn,
 #addButton {
-    width: 50px;
-    height: 50px;
+    width: 50px; height: 50px; border: none; border-radius: 50%;
+    background: #9cccf3; color: white; font-size: 24px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+}
+
+/* Todos Container */
+#items { display: flex; flex-direction: column; gap: 16px; max-width: 500px; margin: 0 auto 20px; }
+
+.todo-container {
+    background: #fffdf8;
+    padding: 18px 22px;
+    border-radius: 20px;
+    display: flex; flex-direction: column; gap: 12px;
+    box-shadow: 0 8px 16px rgba(180, 210, 235, 0.4);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Todo Header */
+.todo-header { display: flex; justify-content: space-between; align-items: center; }
+
+.todo-container p { margin:0; font-size:20px; color:#6b7f90; transition: color 0.4s ease, transform 0.3s ease; }
+.todo-container p.done { text-decoration: line-through; color:#c0c0c0; transform: scale(0.97); }
+
+/* Subtasks */
+.subtask-list { list-style:none; padding-left:20px; display:flex; flex-direction:column; gap:6px; }
+.subtask-item { display:flex; justify-content:space-between; align-items:center; font-size:18px; }
+.subtask-item span { transition: color 0.4s ease, transform 0.3s ease; }
+.subtask-item span.done { text-decoration: line-through; color:#c0c0c0; transform: scale(0.97); }
+
+/* Buttons */
+.button-group { display:flex; gap:10px; }
+
+/* Haupttask Buttons (Herzen) */
+.done-btn,
+.delete-btn {
+    width: 50px; height: 50px; border:none; border-radius:50%;
+    background:#f6b1c8; cursor:pointer; display:flex; align-items:center; justify-content:center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.delete-btn { background:#9cccf3; }
+.done-btn:hover,
+.delete-btn:hover { transform: scale(1.1); box-shadow:0 6px 12px rgba(0,0,0,0.2); }
+
+/* Subtask Buttons (kleiner) */
+.sub-done-btn,
+.sub-delete-btn {
+    width:36px; height:36px; border:none; border-radius:50%;
+    cursor:pointer; display:flex; align-items:center; justify-content:center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.sub-done-btn { background:#f6b1c8; }
+.sub-delete-btn { background:#9cccf3; }
+.sub-done-btn:hover,
+.sub-delete-btn:hover { transform: scale(1.2); box-shadow:0 4px 10px rgba(0,0,0,0.15); }
+
+/* Dark Mode */
+body.dark-mode {
+    background: linear-gradient(180deg, #1b1f2a, #2a2f3c);
+    color: #d0d0d0;
+}
+body.dark-mode h1 { color:#a3c4f3; }
+body.dark-mode h2 { color:#8abde3; }
+body.dark-mode input { background:#3a3f50; color:#fff; border:1px solid #5a5f70; }
+body.dark-mode .todo-container { background:#2a2f3c; box-shadow:0 8px 16px rgba(50,60,80,0.5); }
+body.dark-mode .todo-container p,
+body.dark-mode .subtask-item span { color:#e0e0e0; }
+body.dark-mode .todo-container p.done,
+body.dark-mode .subtask-item span.done { color:#888; }
+body.dark-mode .add-sub-btn,
+body.dark-mode #addButton { background:#5a8ce0; }
+body.dark-mode .sub-done-btn { background:#e07e9f; }
+body.dark-mode .sub-delete-btn { background:#5a8ce0; }
+
+/* Dark Mode Toggle Button */
+#darkModeToggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px; height: 50px;
     border: none;
     border-radius: 50%;
     background: #9cccf3;
     color: white;
     font-size: 24px;
     cursor: pointer;
-}
-
-/* ===============================
-   TODOS CONTAINER
-================================ */
-#items {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    max-width: 500px;
-    margin: 0 auto 20px;
-}
-
-.todo-container {
-    background: #fffdf8;
-    padding: 18px 22px;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    box-shadow: 0 8px 16px rgba(180, 210, 235, 0.4);
-    position: relative;
-}
-
-/* ===============================
-   TODO HEADER
-================================ */
-.todo-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* ===============================
-   TODO TEXT
-================================ */
-.todo-container p {
-    margin: 0;
-    font-size: 20px;
-    color: #6b7f90;
-    transition: color 0.4s ease, transform 0.3s ease;
-}
-
-.todo-container p.done {
-    text-decoration: line-through;
-    color: #c0c0c0;
-    transform: scale(0.97);
-}
-
-/* ===============================
-   SUBTASKS
-================================ */
-.subtask-list {
-    list-style: none;
-    padding-left: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.subtask-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 18px;
-}
-
-.subtask-item span {
-    transition: color 0.4s ease, transform 0.3s ease;
-}
-
-.subtask-item span.done {
-    text-decoration: line-through;
-    color: #c0c0c0;
-    transform: scale(0.97);
-}
-
-/* ===============================
-   BUTTONS
-================================ */
-.button-group {
-    display: flex;
-    gap: 10px;
-}
-
-/* Haupttask Buttons */
-.done-btn,
-.delete-btn {
-    width: 50px;
-    height: 50px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transform: rotate(-45deg);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.done-btn { background: #f6b1c8; }
-.delete-btn { background: #9cccf3; }
-
-.done-btn:hover,
-.delete-btn:hover {
-    transform: rotate(-45deg) scale(1.08);
+    display: flex; align-items:center; justify-content:center;
     box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease, background 0.3s ease;
+    z-index: 1000;
 }
+#darkModeToggle:hover { transform: scale(1.1); }
+body.dark-mode #darkModeToggle { background: #f6b1c8; }
 
-/* Subtask Buttons */
-.sub-done-btn,
-.sub-delete-btn {
-    width: 36px;
-    height: 36px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.sub-done-btn { background: #f6b1c8; }
-.sub-delete-btn { background: #9cccf3; }
-
-.sub-done-btn:hover,
-.sub-delete-btn:hover {
-    transform: scale(1.2);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-}
-
-/* ===============================
-   HINTERGRUND-DEKO
-================================ */
-body::before {
-    content: "☁️ ☁️ 🧁 🍪 ☁️ 🍩";
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 24px;
-    opacity: 0.4;
-}
-
-/* ===============================
-   RESPONSIVE / MOBILE
-================================ */
-@media (max-width: 600px) {
-    body { padding: 15px; }
-
-    #items { gap: 18px; }
-
-    .todo-container { padding: 20px; }
-
-    .todo-container p { font-size: 22px; }
-    .subtask-item span { font-size: 20px; }
-
-    .done-btn,
-    .delete-btn { width: 56px; height: 56px; border-radius: 14px; }
-
-    .sub-done-btn,
-    .sub-delete-btn { width: 40px; height: 40px; border-radius: 8px; }
-
-    input { font-size: 22px; padding: 18px 20px; }
-
-    #input-container,
-    .sub-input-container { flex-direction: column; gap: 14px; }
-
-    .add-sub-btn,
-    #addButton { width: 48px; height: 48px; font-size: 24px; }
-
-    .button-group { gap: 12px; }
+/* Responsive */
+@media (max-width:600px) {
+    input { font-size:22px; padding:18px 20px; }
+    #input-container, .sub-input-container { flex-direction:column; gap:14px; }
+    .add-sub-btn, #addButton { width:48px; height:48px; font-size:24px; }
 }
